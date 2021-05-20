@@ -48,10 +48,10 @@ def api_user_policy_count():
     conn = sqlite3.connect("sqlite.db")
     cur = conn.cursor()
     response = cur.execute(query).fetchall()
-
+    # response_dict = {'count': response}
     conn.close()
 
-    return jsonify(response)
+    return jsonify(response[0][0])
 
 
 # ●	Total days active for a given user
