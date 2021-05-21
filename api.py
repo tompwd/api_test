@@ -193,7 +193,7 @@ def api_policy_new_premium():
         if num > 0:
             where_clause += ' AND '
         if param == 'month':
-            where_clause += f"strftime('%Y-%m', created_at) = {str(params[param]).zfill(2)}"
+            where_clause += f"strftime('%Y-%m', created_at) = {str(params[param])}"
         else:
             where_clause += f'{param} = {params[param]}'
 
@@ -202,6 +202,40 @@ def api_policy_new_premium():
             select date(created_at) date, SUM(premium) total_new_premium from finance
             left join filtered_as_new
             on finance.policy_id = filtered_as_new.policy_id {where_clause} group by date(created_at)"""
+
+    conn = sqlite3.connect("sqlite.db")
+    cur = conn.cursor()
+    response = cur.execute(query).fetchall()
+
+    conn.close()
+
+    return jsonify(response)
+
+
+# ●	pull all policy data
+@app.route('/api/v1/resources/policy', methods=['GET'])
+def api_policy():
+
+    # check for params
+    params = {}
+    if 'month' in request.args:
+        params['month'] = request.args['month']
+    if 'underwriter' in request.args:
+        params['underwriter'] = request.args['underwriter']
+
+    # build where clause
+    where_clause = ''
+    if len(params) > 0:
+        where_clause += 'WHERE '
+    for num, param in enumerate(params):
+        if num > 0:
+            where_clause += ' AND '
+        if param == 'month':
+            where_clause += f"strftime('%Y-%m', policy_start_date) = {str(params[param])}"
+        else:
+            where_clause += f'{param} = {params[param]}'
+
+    query = f"""select * from policy {where_clause}"""
 
     conn = sqlite3.connect("sqlite.db")
     cur = conn.cursor()
