@@ -23,8 +23,8 @@ def api_user_policy_count():
 
     Arguments:
     user_id -- user_id of the user
-    month -- month filter formatted as 'YYYY-mm'
-    underwriter -- underwriter filter
+    month -- month filter formatted as 'YYYY-mm' (OPTIONAL)
+    underwriter -- underwriter filter  (OPTIONAL)
 
     Returns:
     Count of policies for user_id provided
@@ -67,6 +67,16 @@ def api_user_policy_count():
 # ●	Total days active for a given user
 @app.route('/api/v1/resources/user/days_active/count', methods=['GET'])
 def api_user_days_active_count():
+    """Returns number of days active for a given user
+
+    Arguments:
+    user_id -- user_id of the user
+    month -- month filter formatted as 'YYYY-mm' (OPTIONAL)
+    underwriter -- underwriter filter (OPTIONAL)
+
+    Returns:
+    Number of days active for a user_id
+    """
 
     # check for params
     params = {}
@@ -108,6 +118,15 @@ def api_user_days_active_count():
 # ●	Total new user count for a given date
 @app.route('/api/v1/resources/policy/new/count', methods=['GET'])
 def api_policy_new_count():
+    """Returns number of new policies for a given date
+
+    Arguments:
+    date -- date to be checked formatted as 'YYYY-mm-dd'
+    underwriter -- underwriter filter (OPTIONAL)
+
+    Returns:
+    Number of days active for a user_id
+    """
 
     # check for params
     params = {}
@@ -146,6 +165,15 @@ def api_policy_new_count():
 # ●	Total lapsed user count for a given month
 @app.route('/api/v1/resources/policy/lapsed/count', methods=['GET'])
 def api_policy_lapsed_count():
+    """Returns number of lapsed users for a given month
+
+    Arguments:
+    month -- month filter formatted as 'YYYY-mm'
+    underwriter -- underwriter filter (OPTIONAL)
+
+    Returns:
+    Number of lapsed users for a month provided
+    """
 
     # check for params
     params = {}
@@ -185,6 +213,15 @@ def api_policy_lapsed_count():
 # ●	Total new users premium per date for a given underwriter
 @app.route('/api/v1/resources/policy/new/premium', methods=['GET'])
 def api_policy_new_premium():
+    """Returns total premium value per day for a given underwriter
+
+    Arguments:
+    underwriter -- underwriter filter
+    month -- month filter formatted as 'YYYY-mm' (OPTIONAL)
+
+    Returns:
+    Total Premium per day
+    """
 
     # check for params
     params = {}
@@ -225,6 +262,15 @@ def api_policy_new_premium():
 # ●	pull all policy data
 @app.route('/api/v1/resources/policy', methods=['GET'])
 def api_policy():
+    """Returns information from the policy table
+
+    Arguments:
+    underwriter -- underwriter filter (OPTIONAL)
+    month -- month filter formatted as 'YYYY-mm' (OPTIONAL)
+
+    Returns:
+    Policy table data with filters specified applied to the table
+    """
 
     # check for params
     params = {}
