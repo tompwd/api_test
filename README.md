@@ -8,8 +8,15 @@ This API allows querying of the policy database, including these tables / views:
 
 It also provides the code to produce the policy_lifecycle view
 
+
 ## Assumptions
 
+1. From the example given in the word document, I couldnt say for certain if a policy thats active just for a portion
+of the month would count as active or only a purchased policy counts as active for that month.
+
+My assumption is that if any days are cover in that month by a policy, then it is assigned as active. So with the
+example of a new user buying a policy on 20th may ending 20th june who then never buys another policy. They would be
+classed as 'new' in may, 'active' in june, 'churned' in july and finally lapsed on all further months.
 
 
 ## Installation
@@ -33,6 +40,7 @@ Or by running this command in the terminal:
 python3 src.db_setup.py
 ```
 
+
 ### <ins>Creation of Policy Lifecycle Table (OPTIONAL)<ins>
 
 The provided aqlite.db file already has this view added, but if you are recreating this file, you will also need to
@@ -43,6 +51,7 @@ Or by running this command in the terminal
 ```bash
 python3 src.policy_lifecycle_view.py
 ```
+
 
 ### <ins>Running Unit Tests<ins>
 
@@ -58,7 +67,13 @@ python3 api.py
 
 2. You can now run all tests or individual tests from your IDE testing functionality
 
+
 ### <ins>Using the API<ins>
+
+Start up the web service API by running the api.py file or using the following command:
+```bash
+python3 api.py
+```
 
 Once the API service is running you can access the various services using the URL's specified in the code. I have
 provided below a few example URL's to try to see the outputs.
