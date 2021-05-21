@@ -1,4 +1,4 @@
-import csv, sqlite3
+import sqlite3
 from src.config import table_definitions
 import pandas as pd
 
@@ -15,5 +15,5 @@ for table in source_data:
     df = pd.read_csv(f'./raw_data/{table}.csv')
     df.to_sql(table.split('_')[0], conn, if_exists='append', index=False)
 
-#close connection after initial load complete
+# close connection after initial load complete
 conn.close()

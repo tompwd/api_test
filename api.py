@@ -81,7 +81,9 @@ def api_user_days_active_count():
         else:
             where_clause += f'{param} = {params[param]}'
 
-    query = f"""with policy_days as (select cast(round(julianday(policy_end_date) - julianday(policy_start_date)) as integer) as days FROM policy {where_clause})
+    query = f"""with policy_days as
+                    (select cast(round(julianday(policy_end_date) - julianday(policy_start_date)) as integer) as days
+                        FROM policy {where_clause})
                 select SUM(days) from policy_days"""
 
     conn = sqlite3.connect("sqlite.db")
@@ -164,7 +166,7 @@ def api_policy_lapsed_count():
 
     conn.close()
 
-    return jsonify(response)
+    return jsonify(response[0][0])
 
 
 # ●	Total new users premium per date for a given underwriter
@@ -195,7 +197,8 @@ def api_policy_new_premium():
     query = f"""with new as (select user_id, min(policy_start_date) inception FROM policy group by user_id)
                 , filtered_as_new as (select p.*, n.inception from policy p left join new n on p.user_id =n.user_id)
             select date(created_at) date, SUM(premium) total_new_premium from finance
-            left join filtered_as_new on finance.policy_id = filtered_as_new.policy_id {where_clause} group by date(created_at)"""
+            left join filtered_as_new
+            on finance.policy_id = filtered_as_new.policy_id {where_clause} group by date(created_at)"""
 
     conn = sqlite3.connect("sqlite.db")
     cur = conn.cursor()
