@@ -158,7 +158,10 @@ def api_policy_lapsed_count():
         else:
             where_clause += f'{param} = {params[param]}'
 
-    query = f"""select COUNT(*) from policy_lifecycle {where_clause}"""
+    query = f"""with underwriter as (select user_id, underwriter from policy group by user_id, underwriter),
+                lifecycle_enriched as (select * from policy_lifecycle pl
+                                                left join underwriter u on pl.user_id = u.user_id)
+                select COUNT(*) from lifecycle_enriched {where_clause}"""
 
     conn = sqlite3.connect("sqlite.db")
     cur = conn.cursor()
