@@ -64,13 +64,17 @@ Once the API service is running you can access the various services using the UR
 provided below a few example URL's to try to see the outputs.
 
 - Total policy count for a given user
-    - http://127.0.0.1:5000/api/v1/resources/user/policy/count?user_id='user_000000BzeQ5BO4Urilu5LCOwr09eT'
+    - http://127.0.0.1:5000/api/v1/resources/user/policy/count?user_id=%27user_000000BzeQ5BO4Urilu5LCOwr09eT%27
 - Total days active for a given user
-
+    - http://127.0.0.1:5000/api/v1/resources/user/days_active/count?user_id=%27user_000000C4wvsbftmmdew81vUDGDwjx%27
 - Total new user count for a given date
+    - http://127.0.0.1:5000/api/v1/resources/policy/new/count?date=%272020-03-04%27
 - Total lapsed user count for a given month
+    - http://127.0.0.1:5000/api/v1/resources/policy/lapsed/count?month=%272021-02%27&underwriter=%27red%27
 - Total new users premium per date for a given underwriter
-
+    - http://127.0.0.1:5000/api/v1/resources/policy/new/premium?underwriter=%27red%27&month=%272020-03%27
+- Pull all policy data
+    - http://127.0.0.1:5000/api/v1/resources/policy?underwriter=%27red%27
 
 ## Contributions
 - Tom Stowers - 21/05/2021
