@@ -65,7 +65,10 @@ Steps to follow for testing:
 python3 api.py
 ```
 
-2. You can now run all tests or individual tests from your IDE testing functionality
+2. You can now run all tests or individual tests from your IDE testing functionality or run the following command:
+```bash
+pytest .
+```
 
 
 ### <ins>Using the API<ins>
