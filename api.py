@@ -19,6 +19,16 @@ def page_not_found(e):
 # ●	Total policy count for a given user
 @app.route('/api/v1/resources/user/policy/count', methods=['GET'])
 def api_user_policy_count():
+    """Returns count of policies for a given user
+
+    Arguments:
+    user_id -- user_id of the user
+    month -- month filter formatted as 'YYYY-mm'
+    underwriter -- underwriter filter
+
+    Returns:
+    Count of policies for user_id provided
+    """
 
     # check for params
     params = {}
