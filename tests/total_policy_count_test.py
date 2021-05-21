@@ -3,6 +3,7 @@ from flask_testing import TestCase
 import requests
 import json
 
+
 class MyTests(TestCase):
 
     def create_app(self):
@@ -19,12 +20,13 @@ class MyTests(TestCase):
         response = requests.get(
             "http://127.0.0.1:5000/api/v1/resources/user/policy/count?user_id='user_000000BcyxC7NwL6OnB9boEXLUNBw'"
             )
-        print(response.text)
+
         assert json.loads(response.text) == 5
 
     def test_policy_count_month(self):
         response = requests.get(
-            "http://127.0.0.1:5000/api/v1/resources/user/policy/count?user_id='user_000000BcyxC7NwL6OnB9boEXLUNBw'&month='2020-05'"
+            "http://127.0.0.1:5000/api/v1/resources/user/policy/count"
+            "?user_id='user_000000BcyxC7NwL6OnB9boEXLUNBw'&month='2020-05'"
             )
 
         assert json.loads(response.text) == 1

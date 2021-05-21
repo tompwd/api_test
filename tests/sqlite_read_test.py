@@ -7,5 +7,3 @@ def test_sqlite_read():
     cur.execute("SELECT * FROM policy")
     rows = cur.fetchall()
     assert len(rows) == 49
-
-

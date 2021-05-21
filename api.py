@@ -56,7 +56,7 @@ def api_user_policy_count():
 
 # ●	Total days active for a given user
 @app.route('/api/v1/resources/user/days_active/count', methods=['GET'])
-def api_user_active_count():
+def api_user_days_active_count():
 
     # check for params
     params = {}
@@ -81,7 +81,7 @@ def api_user_active_count():
         else:
             where_clause += f'{param} = {params[param]}'
 
-    query = f"""with policy_days as (select cast(round(julianday(policy_end_date) - julianday(policy_start_date)) as integer) + 1 as days FROM policy {where_clause})
+    query = f"""with policy_days as (select cast(round(julianday(policy_end_date) - julianday(policy_start_date)) as integer) as days FROM policy {where_clause})
                 select SUM(days) from policy_days"""
 
     conn = sqlite3.connect("sqlite.db")
@@ -90,7 +90,7 @@ def api_user_active_count():
 
     conn.close()
 
-    return jsonify(response)
+    return jsonify(response[0][0])
 
 
 # ●	Total new user count for a given date
@@ -128,7 +128,7 @@ def api_policy_new_count():
 
     conn.close()
 
-    return jsonify(response)
+    return jsonify(response[0][0])
 
 
 # ●	Total lapsed user count for a given month

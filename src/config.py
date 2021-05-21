@@ -1,5 +1,5 @@
 policy_table = """CREATE TABLE policy
-(
+	(
 	policy_id         TEXT PRIMARY KEY,
 	user_id           TEXT,
 	subscription_id   TEXT,
@@ -30,15 +30,3 @@ calendar_table = """CREATE TABLE calendar
 )"""
 
 table_definitions = [policy_table, finance_table, calendar_table]
-
-
-class Config(object):
-    """Parent configuration class."""
-    DEBUG = False
-	TESTING = False
-
-
-class TestConfig(Config):
-    """Configurations for Production."""
-    DEBUG = True
-    TESTING = True
