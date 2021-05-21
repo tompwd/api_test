@@ -26,17 +26,22 @@ with dates as (select distinct(year_month) from calendar),
             when active_date_month = year_month AND start_month <> year_month
                 then 'active'
             when cast(round(
-                (julianday(date(year_month || '-01')) - julianday(date(active_date_month || '-01')) )/ 30) as integer) = 1
+                (julianday(date(year_month || '-01')) -
+                 julianday(date(active_date_month || '-01')) )/ 30) as integer) = 1
                 then 'churned'
             when cast( round(
-                (julianday(date(year_month || '-01')) - julianday(date(active_date_month || '-01')) ) / 30) as integer) > 1
+                (julianday(date(year_month || '-01')) -
+                 julianday(date(active_date_month || '-01')) ) / 30) as integer) > 1
                 then 'lapsed'
             end user_lifecycle_status
         ,case
-            when cast( round( (julianday(date(year_month || '-01')) - julianday(date(active_date_month || '-01')) ) / 30) as integer) = 0
+            when cast( round( (julianday(date(year_month || '-01')) -
+                               julianday(date(active_date_month || '-01')) ) / 30) as integer) = 0
                 then NULL
-            when cast( round( (julianday(date(year_month || '-01')) - julianday(date(active_date_month || '-01')) ) / 30) as integer) > 0
-                then cast( round( (julianday(date(year_month || '-01')) - julianday(date(active_date_month || '-01')) ) / 30) as integer) - 1
+            when cast( round( (julianday(date(year_month || '-01')) -
+                               julianday(date(active_date_month || '-01')) ) / 30) as integer) > 0
+                then cast( round( (julianday(date(year_month || '-01')) -
+                                   julianday(date(active_date_month || '-01')) ) / 30) as integer) - 1
             end lapsed_months
         from dates_table_filtered order by year_month, user_id;"""
 
