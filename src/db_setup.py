@@ -1,5 +1,5 @@
 import sqlite3
-from src.config import table_definitions
+from config import table_definitions
 import pandas as pd
 
 conn = sqlite3.connect("sqlite.db")
