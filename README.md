@@ -22,7 +22,7 @@ classed as 'new' in may, 'active' in june, 'churned' in july and finally lapsed 
 ## Installation
 
 Open the project. I have also provided a requirements.txt so you can install the requirements, and if using virtual
-environments activate the virtual environment
+environments activate the virtual environment before doing so.
 
 ```bash
 . .venv/bin/activate
