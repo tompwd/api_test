@@ -32,7 +32,7 @@ Open project and activate the virtual environment
 ### <ins>Creation of the sqlite.db (OPTIONAL)<ins>
 
 I have provided a completed sqlite.db file in the project, but if you would like to recreate this from scratch, you can
-do this by running the db_setup.py files found in the src folder.
+do this by deleting the existing sqlite.db file and running the db_setup.py file found in the src folder.
 
 Or by running this command in the terminal:
 
@@ -43,8 +43,8 @@ python3 src.db_setup.py
 
 ### <ins>Creation of Policy Lifecycle Table (OPTIONAL)<ins>
 
-The provided aqlite.db file already has this view added, but if you are recreating this file, you will also need to
-recreate this view. This can be done by running the policy_lifecycle_view.py file in the src folder.
+The provided sqlite.db file already has this view added, but if you are recreating this file, you will also need to
+recreate the view. This can be done by running the policy_lifecycle_view.py file in the src folder.
 
 Or by running this command in the terminal
 
